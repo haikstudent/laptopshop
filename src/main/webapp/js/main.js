@@ -1,14 +1,38 @@
 function initPage() {
 console.log(window.location.pathname);
 	if (window.location.pathname.endsWith("/shopadmin/poverzicht.html")){
-		loadProductsAdmin();
+		logOut();
+		var strJ = localStorage.getItem("sessionTokenStr");
+		var parseJson = JSON.parse(strJ);
+		if(strJ != null){
+			if (parseJson['role'] != "admin"){
+				window.location.href = "../shopadmin/";
+			}else if (parseJson['role'] == "admin"){
+				loadProductsAdmin();
+			}
+		}else{
+			window.location.href = "../shopadmin/";
+		}
+		
+		
+		
 
 		
 		
 	}
 	if (window.location.pathname.endsWith("/shopadmin/ptoevoegen.html")){
-		loadAtttribues();
-		
+		logOut();
+		var strJ = localStorage.getItem("sessionTokenStr");
+		var parseJson = JSON.parse(strJ);
+		if(strJ != null){
+			if (parseJson['role'] != "admin"){
+				window.location.href = "../shopadmin/";
+			}else if (parseJson['role'] == "admin"){
+				loadAtttribues();
+			}
+		}else{
+			window.location.href = "../shopadmin/";
+		}
 		// Create formulier knop afhandeling
 		document.querySelector("#new-product").addEventListener("click", function(){
 			var formData = new FormData(document.querySelector("#nForm"));
@@ -17,7 +41,7 @@ console.log(window.location.pathname);
 					method: 'POST',
 					body: encData,
 					headers: {
-						'Authorization': 'Bearer ' + window.sessionStorage.getItem("sessionToken")
+						'Authorization': 'Bearer ' + window.localStorage.getItem("sessionToken")
 					}
 			}
 			
@@ -33,7 +57,20 @@ console.log(window.location.pathname);
 	}
 	
 	if (window.location.pathname.endsWith("/shopadmin/pupdate.html")){
-		loadAtttribues(update = true);
+		logOut();
+		var strJ = localStorage.getItem("sessionTokenStr");
+		var parseJson = JSON.parse(strJ);
+		if(strJ != null){
+			if (parseJson['role'] != "admin"){
+				window.location.href = "../shopadmin/";
+			}else if (parseJson['role'] == "admin"){
+				loadAtttribues(update = true);
+			}
+		}else{
+			window.location.href = "../shopadmin/";
+		}
+		
+		
 		
 		document.querySelector("#update-product").addEventListener("click", function(){
 			var code = document.querySelector("#update-product").getAttribute('data-code');
@@ -42,10 +79,10 @@ console.log(window.location.pathname);
 			var encData = new URLSearchParams(formData.entries());
 			var fetchoptions = {
 					method: 'PUT',
-					body: encData
-//					headers: {
-//						'Authorization': 'Bearer ' + window.sessionStorage.getItem("sessionToken")
-//					}
+					body: encData,
+					 headers: {
+					 'Authorization': 'Bearer ' + window.localStorage.getItem("sessionToken")
+					 }
 			}
 			
 			fetch("../restservices/producten/" + code, fetchoptions)
@@ -63,22 +100,64 @@ console.log(window.location.pathname);
 		})
 	}
 	
+	if (window.location.pathname.endsWith("/shopadmin/")){
+	
+		document.querySelector("#login").addEventListener("click", function(){
+			var formData = new FormData(document.querySelector("#loginform"));
+			var encData = new URLSearchParams(formData.entries());
+			fetch('../restservices/authentication', {method: 'POST', body: encData})
+			.then(function(response){
+				if(response.ok){
+					window.location.href = "../shopadmin/poverzicht.html";
+					return response.json();
+				} else{alert("fout gebruiksnaam of wachtwoord")};
+			})
+			.then(function(token){
+					var base64Url = token['JWT'].split('.')[1];
+				    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+				    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+				        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+				    }).join(''));
+
+								
+				window.localStorage.setItem("sessionTokenStr", jsonPayload)
+				window.localStorage.setItem("sessionToken", token.JWT)
+				console.log
+			})
+			.catch(error => console.log(error));
+			
+			
+		})
+
+		
+		
+	}
+	
 
 
 }
 
 // laadt de producten voor de admin overicht pagina
 function loadProductsAdmin(){
+	
 	 fetch("../restservices/producten/overzicht")
-	    .then(response => response.json())
+	    .then(function(response){
+	    	if (response.status != 200){
+	    		alert("oops, er ging iets fout /n probeer opnieuw in te loggen");
+	    		window.location.href = "../shopadmin/";
+	    	}else{
+	    		return response.json();
+	    	}
+	    })
 	    .then(j => {
+	    	
 	    	for (var i in j){
 	    		console.log(j);
 	    		var row = document.createElement("TR");
 	    		row.setAttribute("class", "rij");
 	    		for ( let b in j[i]) {
 	    			row.setAttribute('data-code', j[i]['id']);
-//	    			console.log(j[i]);
+
 	    			 var td = document.createElement("TD");
 	    			 var textnode = document.createTextNode(j[i][b]);
 	    			 td.appendChild(textnode);
@@ -121,7 +200,7 @@ function loadProductsAdmin(){
 					var fetchoptions = {
 							method: 'DELETE',
 							headers: {
-								'Authorization': 'Bearer ' + window.sessionStorage.getItem("sessionToken")
+								'Authorization': 'Bearer ' + window.localStorage.getItem("sessionToken")
 							}
 					}
 					
@@ -180,8 +259,16 @@ function loadProductsAdmin(){
 function loadAtttribues(update){
 	var uproduct; 	
 	var setOption;
+	var fetchoptions = {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + localStorage.getItem("sessionToken")
+			}
+	}
+	
+	
 	if(update == true){
-		fetch('../restservices/producten/' + localStorage.getItem('product_id'))
+		fetch('../restservices/producten/' + localStorage.getItem('product_id'), fetchoptions)
 	    .then(response => response.json())
 	    .then(j => {
 	    	uproduct = j;
@@ -195,7 +282,7 @@ function loadAtttribues(update){
 	    }
 	
 	
-	fetch('../restservices/producten/laadattr')
+	fetch('../restservices/producten/laadattr',fetchoptions)
     .then(response => response.json())
     .then(j => {
     	
@@ -268,8 +355,22 @@ function loadAtttribues(update){
     })
 	
 }
-	
 
+
+function logOut(){
+	document.querySelectorAll(".login-out")
+	.forEach(btn => {
+ 		btn.addEventListener('click', e => {
+ 			e.stopPropagation();
+ 			 localStorage.clear();
+ 			 window.location.href = "../shopadmin/";
+		
+ 		})
+ 		
+		
+	});
+	
+}
 
 
 

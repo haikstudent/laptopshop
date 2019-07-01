@@ -27,10 +27,10 @@ public class AuthenticationResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response authenticateUser(@FormParam("username") String username, @FormParam("password") String pass) throws NamingException {
+	public Response authenticateUser(@FormParam("uname") String umail, @FormParam("upass") String pass) throws NamingException {
 		try {
 			userPostgresDaoImpl daoImpl = new userPostgresDaoImpl();
-			String role = daoImpl.findRoleForUser(username, pass);
+			String role = daoImpl.findRoleForUser(umail, pass);
 
 			if (role == null) {
 				throw new IllegalArgumentException("No user found!");

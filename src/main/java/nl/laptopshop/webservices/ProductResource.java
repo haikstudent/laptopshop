@@ -26,7 +26,7 @@ import nl.laptopshop.persistence.Product;
 
 @Path("/producten")
 public class ProductResource {
-
+//alle producten ophalen
 	@GET
 	@Path("/overzicht")
 	@Produces("application/json")
@@ -54,8 +54,10 @@ public class ProductResource {
 		return array.toString();
 	}
 
+//	laadt de gegevens van 1 product voor de update
 	@GET
 	@Path("/laadattr")
+	@RolesAllowed({"admin"})
 	@Produces("application/json")
 	public String getProductsAtrr() throws Exception {
 		ProductService service = ServiceProvider.getProductService();
@@ -108,10 +110,10 @@ public class ProductResource {
 	}
 	
 	
-	
+//	nieuw product toevoegen
 	@POST
 	@Path("/new")
-//	@RolesAllowed({"admin"})
+	@RolesAllowed({"admin"})
 	@Produces("application/json")
 	public Response create(
 						   @FormParam("Model") String model,
@@ -132,9 +134,10 @@ public class ProductResource {
 		
 	}
 	
+//	verwijder een product
 	@DELETE
 	@Path("{code}")
-//	@RolesAllowed({"admin"})
+	@RolesAllowed({"admin"})
 	@Produces("application/json")
 	public Response delete(@PathParam("code") int code) throws Exception {
 		ProductService service = ServiceProvider.getProductService();
@@ -148,8 +151,10 @@ public class ProductResource {
 	}
 	
 	
+//	verkrijg de informatie van 1 product
 	@GET
 	@Path("{code}")
+	@RolesAllowed({"admin"})
 	@Produces("application/json")
 	public String getProduct(@PathParam("code") int code) throws Exception {
 		ProductService service = ServiceProvider.getProductService();
@@ -175,7 +180,7 @@ public class ProductResource {
 	
 	
 	@Path("{code}")
-//	@RolesAllowed({"admin"})
+	@RolesAllowed({"admin"})
 	@PUT
 	@Produces("application/json")
 	public Response update(@PathParam("code") int code,
