@@ -1,12 +1,12 @@
 function initPage() {
 console.log(window.location.pathname);
-	if (window.location.pathname == "/laptopshop/shopadmin/poverzicht.html"){
+	if (window.location.pathname == "shopadmin/poverzicht.html"){
 		loadProductsAdmin();
 
 		
 		
 	}
-	if (window.location.pathname == "/laptopshop/shopadmin/ptoevoegen.html"){
+	if (window.location.pathname == "shopadmin/ptoevoegen.html"){
 		loadAtttribues();
 		
 		// Create formulier knop afhandeling
@@ -21,7 +21,7 @@ console.log(window.location.pathname);
 					}
 			}
 			
-			fetch("/laptopshop/restservices/producten/new", fetchoptions)
+			fetch("restservices/producten/new", fetchoptions)
 				.then(function(response) {
 				if (response.ok){
 					alert("Product is succesvol toegevoegd!");
@@ -32,7 +32,7 @@ console.log(window.location.pathname);
 		})
 	}
 	
-	if (window.location.pathname == "/laptopshop/shopadmin/pupdate.html"){
+	if (window.location.pathname == "shopadmin/pupdate.html"){
 		loadAtttribues(update = true);
 		
 		document.querySelector("#update-product").addEventListener("click", function(){
@@ -48,7 +48,7 @@ console.log(window.location.pathname);
 //					}
 			}
 			
-			fetch("/laptopshop/restservices/producten/" + code, fetchoptions)
+			fetch("restservices/producten/" + code, fetchoptions)
 			.then(function(response) {
 				if (response.ok){
 					alert("Product is succesvol bijgewerkt!");
@@ -69,7 +69,7 @@ console.log(window.location.pathname);
 
 // laadt de producten voor de admin overicht pagina
 function loadProductsAdmin(){
-	 fetch("/laptopshop/restservices/producten/overzicht")
+	 fetch("restservices/producten/overzicht")
 	    .then(response => response.json())
 	    .then(j => {
 	    	for (var i in j){
@@ -125,7 +125,7 @@ function loadProductsAdmin(){
 							}
 					}
 					
-					fetch("/laptopshop/restservices/producten/" + code, fetchoptions)
+					fetch("restservices/producten/" + code, fetchoptions)
 					.then(function(response) {
 						if (response.ok){
 							console.log("delete");
@@ -158,7 +158,7 @@ function loadProductsAdmin(){
 					console.log(e);
 					console.log(e['path'][1]);
 					localStorage.setItem("product_id", e.target.dataset.code);
-					window.location.href = "/laptopshop/shopadmin/pupdate.html";
+					window.location.href = "shopadmin/pupdate.html";
 					
 			 		})
 			 		
@@ -181,7 +181,7 @@ function loadAtttribues(update){
 	var uproduct; 	
 	var setOption;
 	if(update == true){
-		fetch('/laptopshop/restservices/producten/' + localStorage.getItem('product_id'))
+		fetch('restservices/producten/' + localStorage.getItem('product_id'))
 	    .then(response => response.json())
 	    .then(j => {
 	    	uproduct = j;
@@ -195,7 +195,7 @@ function loadAtttribues(update){
 	    }
 	
 	
-	fetch('/laptopshop/restservices/producten/laadattr')
+	fetch('restservices/producten/laadattr')
     .then(response => response.json())
     .then(j => {
     	
