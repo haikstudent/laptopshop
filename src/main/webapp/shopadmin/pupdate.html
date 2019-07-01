@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/laptopshop/css/style.css">
 <link rel="shortcut icon" href="img/favicon/favicon.ico"
 	type="image/x-icon">
 <link rel="stylesheet"
@@ -13,24 +13,27 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <meta charset="utf-8">
-<title>Laptopshop</title>
+<title>Product toevoegen</title>
 </head>
 
-<body>
-	<div class="login-menu"><ul>
-							<li><a class="login-menu-item" href="#">login</a></li>
-						</ul></div>
+<body class="shopadmin">
+	<div class="login-menu">
+		<ul>
+			<li><a class="login-menu-item" href="#">login</a></li>
+		</ul>
+	</div>
 	<div class="outer-body">
 		<div class="content">
 			<div class="top-content">
 				<div class="top-bar row-width">
 					<div class="top-bar-logo half mobile">
-						<img src="img/laptoplogo.png" alt="Laptopshop logo">
+						<img src="/laptopshop/img/laptoplogo.png" alt="Laptopshop logo">
 					</div>
 					<div class="top-bar-button half mobile">
 						<ul>
-							<li><i class="fas fa-phone"></i> <a class="" href="tel:0301122345">030 112 23 45 </a></li>
-							<li><i class="fas fa-envelope"></i><a class="" href="mailto:laptopshop@info.nl">laptopshop@info.nl</a></li>
+							<li>telefoonnummer: <a class="" href="tel:0301122345">030
+									112 23 45 </a></li>
+							<li>email:<a class="" href="mailto:laptopshop@info.nl">laptopshop@info.nl</a></li>
 						</ul>
 					</div>
 
@@ -40,32 +43,41 @@
 				<div class="top-menu-row row-width">
 					<div class="top-menu">
 						<ul>
-							<li><a class="menu-item" href="/laptopshop/">Home</a></li>
-							<li><a class="menu-item" href="/laptopshop/producten.html">Laptops</a></li>
-							<li><a class="menu-item" href="/laptopshop/contact.html">Contact</a></li>
-							<li><a class="menu-item" href="#">Winkelwagen</a></li>
-							<li><input type="text" name="search"></li>
+							<li><a class="menu-item"
+								href="/laptopshop/shopadmin/poverzicht.html">Producten</a></li>
+							<li><a class="menu-item"
+								href="/laptopshop/shopadmin/ptoevoegen.html">Product
+									toevoegen</a></li>
+							<li><a class="menu-item" href="/laptopshop/">Terug naar
+									de winkel</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="middle-content">
 				<div class="middle-row row-width">
-					<div class="middle-text half mobile">
-						<h1>Laptopshop</h1>
-						<p>Welkom bij de beste Laptopshop van Nederland. Op deze website kunt gemakkelijk uw droom laptop vinden. In ons speciaal geselecteerd assortiment vind uw alleen laptops waarvan wij zeker van zijn.
-						
-						Wij zijn Laptopshop, de beste laptopshop van Nederland. Wij hebben meer dan 10 jaar ervaring met de verkoop van laptops. Hierdoor kunnen wij u als geen ander helpen met het maken van uw keuze. Voor vragen kunt u ons altijd mailen
-						</p>
+					<div class="ptoevoegen-form">
+						<ul>
+							<li>Model</li>
+							<li>Prijs</li>
+							<li>Resolutie(0000X0000)</li>
+							<li>Werkgeheugen(in GB)</li>
+							<li>Leverancier</li>
+							<li>Processor</li>
+							<li>Grafische kaart</li>
+							<li>Opslag</li>
+						</ul>
 					</div>
-					<div class="middle-img half mobile">
-						<img src="img/shop.jpg" alt="lokaal met tekst">
-						<!-- <div class="empty-div">
+					<div class="ptoevoegen-form">
+						<form id="nForm" class="ptoevoegen">
+							<input type="text" id="model" name="Model"> <input type="number" id="prijs"
+								name="Prijs"> <input type="text" id="resolutie" name="Resolutie"><input
+								type="number" id="werkgeheugen" name="Werkgeheugen">
 
-              </div> -->
+						</form>
+						<input type="submit" id="update-product" value="Bijwerken">
+
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -85,6 +97,7 @@
 				van uw keuze. Voor vragen kunt u ons altijd mailen.</div>
 		</div>
 	</div>
+	<script src="/laptopshop/js/main.js"></script>
 </body>
 
 </html>

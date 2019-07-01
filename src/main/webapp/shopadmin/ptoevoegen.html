@@ -16,10 +16,12 @@
 <title>Product toevoegen</title>
 </head>
 
-<body>
-<div class="login-menu"><ul>
-							<li><a class="login-menu-item" href="#">login</a></li>
-						</ul></div>
+<body class="shopadmin">
+	<div class="login-menu">
+		<ul>
+			<li><a class="login-menu-item" href="#">login</a></li>
+		</ul>
+	</div>
 	<div class="outer-body">
 		<div class="content">
 			<div class="top-content">
@@ -41,17 +43,41 @@
 				<div class="top-menu-row row-width">
 					<div class="top-menu">
 						<ul>
-							<li><a class="menu-item" href="/laptopshop/shopadmin/poverzicht.html">Producten</a></li>
-							<li><a class="menu-item" href="/laptopshop/shopadmin/ptoevoegen.html">Product toevoegen</a></li>
-							<li><a class="menu-item" href="/laptopshop/">Terug naar de winkel</a></li>						
+							<li><a class="menu-item"
+								href="/laptopshop/shopadmin/poverzicht.html">Producten</a></li>
+							<li><a class="menu-item"
+								href="/laptopshop/shopadmin/ptoevoegen.html">Product
+									toevoegen</a></li>
+							<li><a class="menu-item" href="/laptopshop/">Terug naar
+									de winkel</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="middle-content">
 				<div class="middle-row row-width">
-					
+					<div class="ptoevoegen-form">
+						<ul>
+							<li>Model</li>
+							<li>Prijs</li>
+							<li>Resolutie(0000X0000)</li>
+							<li>Werkgeheugen(in GB)</li>
+							<li>Leverancier</li>
+							<li>Processor</li>
+							<li>Grafische kaart</li>
+							<li>Opslag</li>
+						</ul>
+					</div>
+					<div class="ptoevoegen-form">
+						<form id="nForm" class="ptoevoegen">
+							<input type="text" placeholder="XX1233x"name="Model"> <input placeholder="123,30" type="number"
+								name="Prijs"> <input type="text" placeholder="1080X1920" name="Resolutie"><input
+								type="number" placeholder="16" name="Werkgeheugen">
 
+						</form>
+						<input type="submit" id="new-product" value="Aanmaken">
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,6 +97,7 @@
 				van uw keuze. Voor vragen kunt u ons altijd mailen.</div>
 		</div>
 	</div>
+	<script src="/laptopshop/js/main.js"></script>
 </body>
 
 </html>

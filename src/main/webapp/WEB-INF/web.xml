@@ -6,7 +6,7 @@
 		</servlet-class>
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>nl.hu.ipass.laptopshop.webservices</param-value>
+      <param-value>nl.laptopshop.webservices</param-value>
     </init-param>
     <init-param>
       <param-name>jersey.config.server.provider.classnames</param-name>
