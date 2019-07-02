@@ -108,7 +108,6 @@ console.log(window.location.pathname);
 			fetch('../restservices/authentication', {method: 'POST', body: encData})
 			.then(function(response){
 				if(response.ok){
-					window.location.href = "../shopadmin/poverzicht.html";
 					return response.json();
 				} else{alert("fout gebruiksnaam of wachtwoord")};
 			})
@@ -122,7 +121,9 @@ console.log(window.location.pathname);
 								
 				window.localStorage.setItem("sessionTokenStr", jsonPayload)
 				window.localStorage.setItem("sessionToken", token.JWT)
-				console.log
+			})
+			.then(function(){
+				window.location.href = "../shopadmin/poverzicht.html";
 			})
 			.catch(error => console.log(error));
 			
