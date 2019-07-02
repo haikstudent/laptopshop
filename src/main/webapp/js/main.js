@@ -152,7 +152,6 @@ function loadProductsAdmin(){
 	    .then(j => {
 	    	
 	    	for (var i in j){
-	    		console.log(j);
 	    		var row = document.createElement("TR");
 	    		row.setAttribute("class", "rij");
 	    		for ( let b in j[i]) {
@@ -196,7 +195,7 @@ function loadProductsAdmin(){
 			 		btn.addEventListener('click', e => {
 			 			e.stopPropagation();
 					let code = e.target.dataset.code
-					console.log(e.target.dataset.code);
+//					console.log(e.target.dataset.code);
 					var fetchoptions = {
 							method: 'DELETE',
 							headers: {
@@ -207,8 +206,9 @@ function loadProductsAdmin(){
 					fetch("../restservices/producten/" + code, fetchoptions)
 					.then(function(response) {
 						if (response.ok){
-							console.log("delete");
 							
+							e.path[1].style.display = 'none';
+						
 						}
 						else if (response.status == 404)
 							console.log("niet gevonden");
