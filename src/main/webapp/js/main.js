@@ -189,64 +189,69 @@ function loadProductsAdmin(){
 	    	} 
 	    	
 	 
-		window.onload=function(){
-			 document.querySelectorAll(".delete")
-			 	.forEach(btn => {
-			 		btn.addEventListener('click', e => {
-			 			e.stopPropagation();
-					let code = e.target.dataset.code
-//					console.log(e.target.dataset.code);
-					var fetchoptions = {
-							method: 'DELETE',
-							headers: {
-								'Authorization': 'Bearer ' + window.localStorage.getItem("sessionToken")
-							}
-					}
-					
-					fetch("../restservices/producten/" + code, fetchoptions)
-					.then(function(response) {
-						if (response.ok){
-							
-							e.path[1].style.display = 'none';
-						
+		
+	    }).then(function(){
+//	    	window.onload=function(){
+				 document.querySelectorAll(".delete")
+				 	.forEach(btn => {
+				 		btn.addEventListener('click', e => {
+				 			e.stopPropagation();
+						let code = e.target.dataset.code
+//						console.log(e.target.dataset.code);
+						var fetchoptions = {
+								method: 'DELETE',
+								headers: {
+									'Authorization': 'Bearer ' + window.localStorage.getItem("sessionToken")
+								}
 						}
-						else if (response.status == 404)
-							console.log("niet gevonden");
-						else
-							console.log("niet verwijderen");
-					})
-					
-					
-					
-					
-			 		})
-			 		
-					
-				});
-			 
-			 
-			 
-			 
-// wijzig
-			 
-			 document.querySelectorAll(".wijzig")
-			 	.forEach(btn => {
-			 		btn.addEventListener('click', e => {
-			 			e.stopPropagation();
-					let code = e.target.dataset.code
-					console.log(e);
-					console.log(e['path'][1]);
-					localStorage.setItem("product_id", e.target.dataset.code);
-					window.location.href = "../shopadmin/pupdate.html";
-					
-			 		})
-			 		
-					
-				});
-			 
-			 
-			 
-			}
+						
+						fetch("../restservices/producten/" + code, fetchoptions)
+						.then(function(response) {
+							if (response.ok){
+								
+								e.path[1].style.display = 'none';
+							
+							}
+							else if (response.status == 404)
+								console.log("niet gevonden");
+							else
+								console.log("niet verwijderen");
+						})
+						
+						
+						
+						
+				 		})
+				 		
+						
+					});
+				 
+				 
+				 
+				 
+	// wijzig
+				 
+				 document.querySelectorAll(".wijzig")
+				 	.forEach(btn => {
+				 		btn.addEventListener('click', e => {
+				 			e.stopPropagation();
+						let code = e.target.dataset.code
+						console.log(e);
+						console.log(e['path'][1]);
+						localStorage.setItem("product_id", e.target.dataset.code);
+						window.location.href = "../shopadmin/pupdate.html";
+						
+				 		})
+				 		
+						
+					});
+				 
+				 
+				 
+//				}
+	    	
+	    	
+	    	
 	    });
 	 
 	 
