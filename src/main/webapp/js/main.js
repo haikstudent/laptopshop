@@ -189,7 +189,7 @@ function loadProductsAdmin(){
 	    	} 
 	    	
 	 
-		document.onload=function(){
+		window.onload=function(){
 			 document.querySelectorAll(".delete")
 			 	.forEach(btn => {
 			 		btn.addEventListener('click', e => {
