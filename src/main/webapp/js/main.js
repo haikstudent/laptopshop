@@ -74,7 +74,6 @@ console.log(window.location.pathname);
 		
 		document.querySelector("#update-product").addEventListener("click", function(){
 			var code = document.querySelector("#update-product").getAttribute('data-code');
-			console.log(code);
 			var formData = new FormData(document.querySelector("#nForm"));
 			var encData = new URLSearchParams(formData.entries());
 			var fetchoptions = {
@@ -192,13 +191,11 @@ function loadProductsAdmin(){
 	 
 		
 	    }).then(function(){
-//	    	window.onload=function(){
 				 document.querySelectorAll(".delete")
 				 	.forEach(btn => {
 				 		btn.addEventListener('click', e => {
 				 			e.stopPropagation();
 						let code = e.target.dataset.code
-//						console.log(e.target.dataset.code);
 						var fetchoptions = {
 								method: 'DELETE',
 								headers: {
@@ -236,9 +233,7 @@ function loadProductsAdmin(){
 				 	.forEach(btn => {
 				 		btn.addEventListener('click', e => {
 				 			e.stopPropagation();
-						let code = e.target.dataset.code
-						console.log(e);
-						console.log(e['path'][1]);
+						let code = e.target.dataset.code;
 						localStorage.setItem("product_id", e.target.dataset.code);
 						window.location.href = "../shopadmin/pupdate.html";
 						
@@ -249,7 +244,6 @@ function loadProductsAdmin(){
 				 
 				 
 				 
-//				}
 	    	
 	    	
 	    	
@@ -278,7 +272,6 @@ function loadAtttribues(update){
 	    .then(response => response.json())
 	    .then(j => {
 	    	uproduct = j;
-	    	console.log(j);
 	    	
 	    	document.querySelector('#model').value = j['model'];
 	    	document.querySelector('#prijs').value = j['prijs'];
@@ -300,7 +293,7 @@ function loadAtttribues(update){
     		select.setAttribute("id", i);
     		select.setAttribute("name", i);
 
-    		console.log(i);
+    		
     		
     	if(update == true){
     		if (i == "Gkaart"){
