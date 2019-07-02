@@ -286,7 +286,7 @@ function loadAtttribues(update){
 	    	document.querySelector('#werkgeheugen').value = j['werkgeheugen'];
 	    	});
 	    }
-	
+	setTimeout(function(){
 	
 	fetch('../restservices/producten/laadattr',fetchoptions)
     .then(response => response.json())
@@ -359,6 +359,8 @@ function loadAtttribues(update){
     	}
         
     })
+    
+	}, 10);
 	
 }
 
