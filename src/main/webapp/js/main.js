@@ -299,14 +299,14 @@ function loadAtttribues(update){
     		if (i == "Gkaart"){
     			setOption = uproduct['gid'];
     		}
-    		if (i == "Leverancier"){
-    			setOption = uproduct['lid'];
-    		}
     		if (i == "Processor"){
     			setOption = uproduct['pid'];
     		}
     		if (i == "Opslag"){
     			setOption = uproduct['oid'];
+    		}
+    		if (i == "Leverancier"){
+    			setOption = uproduct['lid'];
     		}
     		
     		document.querySelector('#update-product').setAttribute("data-code", uproduct['id']);
@@ -353,7 +353,7 @@ function loadAtttribues(update){
         
     })
     
-	}, 10);
+	}, 50);
 	
 }
 
